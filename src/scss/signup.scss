@@ -1,0 +1,223 @@
+.signup-comp {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 75px);
+    font-family: "Jura", sans-serif;
+
+    .headline {
+        width: 100%;
+        // top: 10%;
+        height: 200px;
+        // position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        h1 {
+            // width: ;
+            text-align: center;
+            width: 100%;
+            font-size: 4rem;
+            padding: 0px 20px;
+            text-shadow: 0px 3px 3px #00000062;
+        }
+
+        .title-task {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ti-h1 {
+            clip-path: polygon(0 0, 41.5% 0, 41.5% 100%, 0% 100%);
+        }
+
+        .ti-h2 {
+            color: #8c8022;
+            z-index: 2;
+            clip-path: polygon(42.5% 0, 100% 0%, 100% 100%, 42.5% 100%);
+            position: absolute;
+        }
+
+        .line {
+            width: 100%;
+            height: 4px;
+            border-radius: 5px;
+            box-shadow: 0px 3px 3px #00000062;
+            background: linear-gradient(to right, #fffa6f, #4d89e2);
+        }
+    }
+
+    .content-banner {
+        min-height: calc(100vh - 75px - 200px);
+        overflow: hidden;
+
+        .outside-show-content {
+            height: 100%;
+
+            .ellipse {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                position: absolute;
+                z-index: -1;
+            }
+
+            .elip1 {
+                left: -20%;
+                top: 25%;
+                background: radial-gradient(circle at 0% 0%, #fff, #d1c251);
+            }
+
+            .elip2 {
+                right: -20%;
+                top: 50%;
+                background: radial-gradient(circle at 100% 0%, #fff, #538fff);
+            }
+        }
+
+        .show-content {
+            padding: 20px 20px;
+            border-radius: 10px;
+            z-index: 2;
+            overflow: hidden;
+            // width: 500px;
+            width: 400px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+            background: radial-gradient(circle at 0% 0%, #d1c251, #538fff);
+            height: calc(100vh - 75px - 200px - 0vh);
+            // @media (max-width: 1500px) {
+            //     width: 85vw;
+            // }
+            // .ellipse {
+            //     z-index: 1;
+            // }
+
+            .title {
+                width: 100%;
+
+                h1 {
+                    font-size: 20px;
+                }
+            }
+
+            .input-item {
+                display: grid;
+                margin: 20px 0px;
+
+                input {
+                    background: #ffffffae;
+                    padding: 10px;
+                    border-radius: 7.5pxs;
+                }
+            }
+
+            .error-message {
+                color: rgb(227, 33, 33);
+            }
+
+            .success-message {
+                color: rgb(9, 129, 9);
+            }
+
+            .button-area {
+                width: 80%;
+                align-self: center;
+                justify-self: center;
+                background: #ffffffbc;
+                margin: 30px 0;
+                overflow: hidden;
+                border-radius: 7.5px;
+                position: relative; // For proper positioning of absolute children
+
+                // The gradient overlay (starts hidden)
+                .gradient-bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 0; // will be animated to 100%
+                    background: linear-gradient(to right, transparent, white);
+                    z-index: 1;
+                }
+
+                // Button with text that uses a gradient fill for the animated text effect
+                button.btn-login {
+                    padding: 10px;
+                    position: relative;
+                    font-weight: 600;
+                    z-index: 2;
+                    background: linear-gradient(90deg, black, red);
+                    background-size: 300%; // makes it possible to shift the gradient
+                    background-position: 0% center;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    border: none;
+                    outline: none;
+                    font-size: 1rem;
+                    cursor: pointer;
+                }
+
+
+                .circ {
+                    left: 7.5%; // starting position
+                    position: absolute;
+                    width: 35px;
+                    height: 35px;
+                    padding: 7.5px; // total effective width ~50px
+                    border-radius: 50%;
+                    background: red;
+                    cursor: pointer;
+                    z-index: 3;
+
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            .alter-sign {
+                margin: 12.5px 0;
+
+                a {
+                    h1 {
+                        position: relative;
+                        display: inline-block;
+                        padding: 5px;
+                        color: black;
+                        transition: color 0.3s ease;
+
+                        // Create the underline using a pseudo-element
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            width: 100%;
+                            height: 1.5px;
+                            background-color: #fff;
+                            transform: scaleX(0);
+                            transform-origin: left;
+                            transition: transform 0.3s ease;
+                        }
+                    }
+
+                    &:hover {
+                        h1 {
+                            color: #fff; // change text color smoothly
+
+                            &::after {
+                                transform: scaleX(1); // animate underline to full width
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

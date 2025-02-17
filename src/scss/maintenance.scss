@@ -1,0 +1,252 @@
+.maintenance-comp {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    * {
+        color: #fff;
+    }
+
+    .sidebar {
+        width: 250px;
+
+        .side-comp {
+            width: 100%;
+            height: calc(100vh - 60px);
+            background: linear-gradient(to bottom, #d9cc6c96, #8cbaffa8);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+
+            a {
+                color: #000;
+            }
+        }
+    }
+
+    .mainboard {
+        width: 100%;
+
+        .sdash-1 {
+            padding: 20px;
+
+            * {
+                color: #000;
+            }
+
+            h1 {}
+
+            .overview-content {
+
+                padding: 20px;
+                background: linear-gradient(150deg, #fff185, #fffbc147, #79afff);
+                background-size: 200% 200%;
+                background-position: 200% 100%;
+                height: 500px;
+                position: relative;
+                overflow: hidden;
+                border-radius: 12px;
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+
+                &::after {
+                    position: absolute;
+                    width: 20vw;
+                    height: 20vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: #79afff;
+                    border-radius: 50%;
+                    bottom: -25%;
+                    right: -25%;
+                    z-index: -2;
+                }
+
+                h1 {
+                    font-size: 1.5rem;
+                    margin-bottom: 20px;
+                    color: #333;
+                }
+
+                .ts-f {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 10px;
+
+                    .ts-f-left {
+                        h2 {
+                            font-size: 15px;
+                            margin-bottom: 10px;
+                            color: #555;
+                        }
+
+                        .ts-f-dt {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            background-color: rgba(255, 255, 255, 0.7);
+                            padding: 10px;
+                            border-radius: 8px;
+
+                            svg {
+                                /* Optional: Style your SVG icon if needed */
+                            }
+
+                            h5 {
+                                font-size: 12.75px;
+                                color: #333;
+                            }
+
+                            input[type='checkbox'] {
+                                width: 16px;
+                                height: 16px;
+                            }
+                        }
+                    }
+
+                    .ts-f-right {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+
+                        .mini-chart {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            p {
+                                margin-top: 10px;
+                                font-size: 0.9rem;
+                                color: #333;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            .dataglobal-content {
+                padding: 10px;
+                // background: linear-gradient(150deg, #d1c251, #ffffff47, #2079ffa9);
+                background-size: 200% 200%;
+                background-position: 100% 0%;
+                width: calc(100vw - 384px - 300px);
+                height: 500px;
+
+                @media (max-width: 1500px) {
+                    width: 724px;
+                }
+
+                // box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35);
+
+                h1 {
+                    height: 20px;
+                }
+
+                .act-data-1 {
+
+                    // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+                    height: calc(100% - 30px - 0px);
+                    padding: 10px;
+                    // overflow-y: scroll;
+                    width: 100%;
+                    background: linear-gradient(150deg, #c6b538, #fffbc147, #609efba9);
+                    background-size: 200% 200%;
+                    background-position: 100% 0%;
+
+                    &::after {
+                        position: absolute;
+                        width: 12.5vw;
+                        height: 12.5vw;
+                        content: '';
+                        filter: blur(10px);
+                        background: #79afff;
+                        border-radius: 50%;
+                        bottom: -25%;
+                        right: -25%;
+                        z-index: -2;
+                    }
+
+                    .search-text {
+                        background: #ffffffba;
+                        color: #000;
+                        padding: 5px;
+                        margin: 5px 0px;
+                        outline: none;
+                        border-radius: 5px;
+
+                        &::placeholder {
+                            color: #000;
+                        }
+                    }
+
+                    .recent-list {
+                        width: 100%;
+                        overflow-x: auto;
+                        overflow-y: auto;
+
+                        .table-container {
+                            max-height: 325px; // Set your desired height
+                            overflow-y: auto;
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+
+                                thead {
+                                    th {
+                                        position: sticky;
+                                        top: 0;
+                                        background-color: rgba(255, 255, 255, 0.9); // Ensure a solid background
+                                        z-index: 1; // So that header stays on top of the tbody rows
+                                        padding: 12px 15px;
+                                        text-align: left;
+                                        font-weight: 600;
+                                        font-size: 0.9rem;
+                                    }
+                                }
+
+                                tbody {
+                                    tr {
+                                        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                                        transition: background-color 0.3s ease;
+
+                                        &:hover {
+                                            background-color: rgba(0, 0, 0, 0.05);
+                                        }
+
+                                        td {
+                                            padding: 12px 15px;
+                                            font-size: 0.9rem;
+
+                                            input {
+                                                padding: 3.5px;
+                                                border-radius: 5px;
+                                                background: #a19850;
+                                                color: #fff;
+
+                                                &::placeholder {
+                                                    color: #fff;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .act-data-1 {
+                margin: 20px 0px;
+                display: flex;
+                backdrop-filter: blur(10px);
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                position: relative;
+                overflow: hidden;
+                z-index: 2;
+            }
+        }
+    }
+}

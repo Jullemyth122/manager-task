@@ -1,0 +1,76 @@
+.dashboard-comp, .maintenance-comp {
+    font-family: "Jura", sans-serif;
+
+    .sidebar {
+        .side-comp {
+
+            .nav-side {
+                // background: orange;
+                // margin: 0px 20px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100px;
+
+
+                h3.txt1 {
+                    text-align: center;
+                    width: 100%;
+                    color: #fff;
+                    font-size: 30px;
+                    // background: orange;
+                    clip-path: polygon(0 0, 44.25% 0, 44.25% 100%, 0% 100%);
+                }
+
+                h3.txt2 {
+                    text-align: center;
+                    width: 100%;
+                    font-size: 30px;
+                    // top: 0;
+                    left: 0px;
+                    // background: orange;
+                    clip-path: polygon(45.5% 0, 100% 0%, 100% 100%, 45.5% 100%);
+                    position: absolute;
+                    color: #8c8022;
+                    z-index: 2;
+                }
+
+
+            }
+
+            h1.admin-txt {
+                color: rgb(40, 93, 226);
+                text-align: center;
+                width: 100%;
+                font-size: 22px;
+            }
+            
+            li {
+
+                display: grid;
+                grid-template-columns: 30% 70%;
+                font-size: 18px;
+                gap: 20px;
+
+
+                & > * { 
+                    align-self: center;
+                    justify-self: center;
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                a {
+                
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+
+}

@@ -1,0 +1,209 @@
+.dashboard-comp {
+    .mainboard {
+        .sdash-1 {
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+
+            * {
+                color: #000;
+            }
+
+            .acc-creation {
+                background: linear-gradient(150deg, #fff185, #fffbc147, #79afff);
+                background-size: 200% 200%;
+                background-position: 200% 100%;
+                height: 425px;
+                border-radius: 12px;
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+                padding: 10px;
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    position: absolute;
+                    width: 20vw;
+                    height: 20vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: #79afff;
+                    border-radius: 50%;
+                    bottom: -25%;
+                    right: -25%;
+                    z-index: -2;
+                }
+
+                .chart-container {
+                    width: 100%;
+                    height: 160px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .table-container {
+                    background-color: rgba(0, 0, 0, 0.05);
+                    border-radius: 8px;
+                    max-height: 250px;
+                    overflow-y: auto;
+                    padding: 5px;
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+
+                        thead {
+                            background: rgba(0, 0, 0, 0.05);
+
+                            th {
+                                padding: 2px 8px;
+                                font-size: 15px;
+                                text-align: left;
+                            }
+                        }
+
+                        tbody {
+                            tr {
+                                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+                                &:hover {
+                                    background-color: rgba(0, 0, 0, 0.1);
+                                }
+
+                                td {
+                                    text-align: left;
+                                    padding: 8px;
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .shared-task-data {
+                padding: 10px;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                height: 500px;
+                background: linear-gradient(150deg, #fff185, #fffbc147, #79afff);
+                background-size: 200% 200%;
+                background-position: 200% 100%;
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    position: absolute;
+                    width: 12.5vw;
+                    height: 12.5vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: #79afff;
+                    border-radius: 50%;
+                    bottom: -25%;
+                    right: -25%;
+                    z-index: -2;
+                }
+
+                h1 {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                .task-categories {
+                    display: flex;
+                    height: 290px;
+                    flex-direction: column;
+                    gap: 10px;
+                    overflow-y: auto;
+
+                    .task-category {
+                        background-color: rgba(0, 0, 0, 0.1);
+                        border-radius: 8px;
+                        padding: 10px;
+                        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+                        h4 {
+                            font-size: 16px;
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                            color: #333;
+                        }
+
+                        ul {
+                            list-style: none;
+                            padding: 0;
+
+                            li {
+                                background: rgba(0, 0, 0, 0.05);
+                                padding: 8px;
+                                border-radius: 6px;
+                                margin-bottom: 5px;
+                                font-size: 14px;
+
+                                &:hover {
+                                    background: rgba(0, 0, 0, 0.1);
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .premium-rate-data {
+                padding: 10px;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 200px;
+                height: 500px;
+                background: linear-gradient(150deg, #fff185, #fffbc147, #79afff);
+                background-size: 200% 200%;
+                background-position: 200% 100%;
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    position: absolute;
+                    width: 12.5vw;
+                    height: 12.5vw;
+                    content: '';
+                    filter: blur(10px);
+                    background: #79afff;
+                    border-radius: 50%;
+                    bottom: -25%;
+                    right: -25%;
+                    z-index: -2;
+                }
+
+                h1 {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                .chart-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                }
+
+                .premium-stats {
+                    p {
+                        font-size: 16px;
+                        margin: 5px 0;
+
+                        strong {
+                            color: #FF5722;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
