@@ -47,7 +47,7 @@ const AccReqControl = () => {
   };
 
   // Handler to update the board (or task) limit
-  const handleBoardLimitChange = async (accId, newLimit) => {
+  const handleTaskLimitChange = async (accId, newLimit) => {
     try {
       const numericLimit = Number(newLimit);
       const accDocRef = doc(db, "account", accId);
@@ -114,7 +114,7 @@ const AccReqControl = () => {
                       type="number"
                       placeholder="Boards Limit"
                       value={acc.taskLimits}
-                      onChange={(e) => handleBoardLimitChange(acc.id, e.target.value)}
+                      onChange={(e) => handleTaskLimitChange(acc.id, e.target.value)}
                     />
 
                     {/* Links Checkbox */}
