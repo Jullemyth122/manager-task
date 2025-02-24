@@ -2,12 +2,12 @@
   .mainboard {
 
     overflow-y: auto;
-    height: calc(100vh - 70px) ;
+    height: calc(100vh - 70px);
 
     .sdash-1 {
       padding: 10px;
       position: relative;
-      
+
       * {
         color: #000;
       }
@@ -16,7 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        
+
       }
 
       [class*="data"] {
@@ -41,7 +41,7 @@
           justify-content: flex-start;
           gap: 10px;
         }
-        
+
         .bg-static {
           top: 0;
           left: 0;
@@ -53,17 +53,17 @@
           border-radius: 15px;
 
           &::after {
-              position: absolute;
-              width: 10vw;
-              height: 10vw;
-              content: '';
-              filter: blur(5px);
-              background: #79afff;
-              border-radius: 50%;
-              bottom: -25%;
-              right: -15%;
-              z-index: -2;
-              box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
+            position: absolute;
+            width: 10vw;
+            height: 10vw;
+            content: '';
+            filter: blur(5px);
+            background: #79afff;
+            border-radius: 50%;
+            bottom: -25%;
+            right: -15%;
+            z-index: -2;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
           }
 
           .outr {
@@ -78,8 +78,10 @@
         }
 
         .recent-dates {
-          padding: 8px; 
+          padding: 8px;
+
           .list-opt {
+
             /* Instead of a dropdown, use a static label */
             .static-select {
               font-size: 13px;
@@ -97,14 +99,15 @@
             background: rgb(182, 255, 182);
           }
         }
-        
+
         .auto-x {
           height: 40px;
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          h1 { 
+
+          h1 {
             font-weight: 600;
           }
         }
@@ -116,6 +119,7 @@
         background-position: 200% 100%;
 
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+
         h1 {
           font-size: 14px;
         }
@@ -123,23 +127,33 @@
     }
 
     .user-act-comp {
-      // .table-container {
-      //     width: 100%;
-  
-      //     table {
-      //         width: 100%;
-      //         border-collapse: collapse;
-      //     }
-  
-      //     .tbody-container {
-      //         max-height: 325px; // Set your desired height
-      //         overflow-y: auto;
-      //     }
-      // }
+
+      .layer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: #b2c8ff;
+        padding: 10px;
+        border-radius: 7.5px;
+        input {
+          width: 30vw;
+          border-radius: 7.5px;
+          outline: none;
+          cursor: pointer;
+          padding: 10px;
+          color: #000;
+          background: #fff;
+          &::placeholder {
+            color: #000;
+          }
+        }
+
+      }
       .layer-list {
         width: 100%;
         overflow-y: auto;
-        
+
         @media (max-width: 1920px) and (max-height: 1080px) {
           height: 55vh;
         }
@@ -160,53 +174,58 @@
 
           thead {
             background: linear-gradient(150deg, #3b73ff, #3da1ff47, #add2ff8b);
+
             tr {
               // display: flex;
               // gap: 5px;
               border-bottom: 1px solid rgba(0, 0, 0, 0.1);
               transition: background-color 0.3s ease;
+
               &:hover {
                 background-color: rgba(0, 0, 0, 0.05);
               }
             }
+
             th {
-                padding: 12px 15px;
-                text-align: left;
-                font-weight: 600;
-                font-size: 15px;
+              padding: 12px 15px;
+              text-align: left;
+              font-weight: 600;
+              font-size: 15px;
             }
           }
 
           tbody {
 
             tr {
-              
+
               // display: flex;
               // gap: 5px;
               border-bottom: 1px solid rgba(0, 0, 0, 0.1);
               transition: background-color 0.3s ease;
               background: linear-gradient(150deg, #acc4ff, #add2ff8b);
-              
-              
+
+
               &:hover {
                 background-color: rgba(0, 0, 0, 0.05);
               }
+
               td {
                 // width: 100%;
                 padding: 12px 15px;
-                font-size: 12px;  
+                font-size: 12px;
                 text-align: left;
-                input {
-                    padding: 3.5px;
-                    align-self: flex-end;
-                    justify-self: flex-end;
-                    border-radius: 5px;
-                    background: #a19850;
-                    color: #fff;
 
-                    &::placeholder {
-                        color: #fff;
-                    }
+                input {
+                  padding: 3.5px;
+                  align-self: flex-end;
+                  justify-self: flex-end;
+                  border-radius: 5px;
+                  background: #a19850;
+                  color: #fff;
+
+                  &::placeholder {
+                    color: #fff;
+                  }
                 }
               }
             }

@@ -2,14 +2,11 @@ import React from 'react';
 import { doc, updateDoc } from "firebase/firestore";
 import { useAuth } from '../../context/useAuth';
 import { db } from '../../utility/firebase';
+import { useTruncateText } from '../../hooks/useTruncateText';
 
 const AccReqControl = () => {
   const { accs, getAccounts } = useAuth(); // Assume getAccounts refreshes the list after an update
 
-  // Utility function to truncate text for display
-  const truncateText = (text, maxLength) => {
-    return text?.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-  };
 
   // Sort accounts by createdAt (newest first)
   const sortedAccs = accs.slice().sort((a, b) => {
@@ -86,7 +83,7 @@ const AccReqControl = () => {
                   <td>
                     {acc.username || '-'}
                     <br />
-                    {truncateText(acc.email || '-', 35)}
+                    {useTruncateText(acc.email || '-', 35)}
                   </td>
                   <td>"Request Features"</td>
                   <td className="grid gap-3">

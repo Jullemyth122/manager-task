@@ -1,8 +1,9 @@
 // useAuth.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../utility/firebase'; // Import providers
+import { auth, db } from '../utility/firebase'; // Import providers
 import { fetchUserAccounts, saveManagerData } from '../utility/manager';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -25,8 +26,21 @@ export const AuthProvider = ({ children }) => {
     const [accs, setAccs] = useState([])
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setCurrentUser(user);
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+            const managerDocRef = doc(db, "manager", user.uid);
+            const managerDocSnap = await getDoc(managerDocRef);
+
+            if (managerDocSnap.exists() && managerDocSnap.data().approval) {
+                setCurrentUser(user);
+            } else {
+                setErrorMessage("Your account is pending approval. Please contact the administrator.");
+                await auth.signOut();
+                setCurrentUser(null);
+            }
+            } else {
+            setCurrentUser(null);
+            }
             setLoading(false);
         });
         return unsubscribe;
@@ -44,22 +58,36 @@ export const AuthProvider = ({ children }) => {
 
     const handleLogin = async () => {
         try {
-            // Sign user in with Firebase
+            // Sign in using Firebase Auth
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user; // Get the user object from the login response
+            const user = userCredential.user;
     
-            // Successfully logged in
-            setSuccessMessage("Successfully logged in!");  // Success message
-            console.log("User signed in:", email);
+            // Fetch the manager's Firestore document using the user's uid
+            const managerDocRef = doc(db, "manager", user.uid);
+            const managerDocSnap = await getDoc(managerDocRef);
     
-            // Save user data to localStorage (ensure to save the correct user object)
+            if (managerDocSnap.exists()) {
+                const managerData = managerDocSnap.data();
+                if (!managerData.approval) {
+                    // Not approved: set error, sign out and return false
+                    setErrorMessage("Your account is pending approval. Please contact the administrator.");
+                    await auth.signOut();
+                    return false;
+                }
+            } else {
+                setErrorMessage("No manager record found for this account.");
+                await auth.signOut();
+                return false;
+            }
+    
+            // If approved, continue with login
+            setSuccessMessage("Successfully logged in!");
             localStorage.setItem("manager", JSON.stringify(user));
-    
-            // Redirect to the dashboard page
-            window.location.href = "/dashboard";
+            return true;
         } catch (error) {
-            setErrorMessage(error.message);  // Set error message if any
-            setSuccessMessage("");  // Clear success message on error
+            setErrorMessage(error.message);
+            setSuccessMessage("");
+            return false;
         }
     };
 
@@ -83,7 +111,6 @@ export const AuthProvider = ({ children }) => {
             setPassword("")
             setEmail("")
             setSuccessMessage("Account has been created wait for pending approval...");  // Success message
-            console.log("User signed up:", username, email);
             
         } catch (error) {
             console.log(error)

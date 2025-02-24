@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { fetchUserBoards } from '../utility/activity'; // Import fetchUserBoards function
+import { fetchUserBoards, sendUserNotification } from '../utility/activity'; // Import functions
 
 const ActivityContext = createContext();
 
@@ -8,10 +8,8 @@ export const useActivity = () => {
 };
 
 const ActivityProvider = ({ children }) => {
-
     const [createBoard, setCreateBoard] = useState();
     const [IsCreateBoard, setIsCreateBoard] = useState(false);
-
     const [boardAttr, setBoardAttr] = useState({
         boardTitle: '',
         boardVisibility: '',
@@ -25,22 +23,52 @@ const ActivityProvider = ({ children }) => {
             const boards = await fetchUserBoards();
             setUserBoards(boards); // Set fetched boards to state
         };
-
         getBoards();
     }, []);
 
-    const handleCreateBoard = async (e, user, board) => {
+    const [message, setMessage] = useState("");
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [status, setStatus] = useState(null);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(""); // New state for success messages
+
+    const handleSendMessage = async (e, currentUser) => {
         e.preventDefault();
 
-        try {
-            await saveUserBoardData(user, board);
-            // After saving, fetch the updated boards
-            const boards = await fetchUserBoards();
+        // Validate required fields
+        if (!selectedUser) {
+            setError("Please select a user to send a message.");
+            return;
+        }
+        if (!message.trim()) {
+            setError("Message cannot be empty.");
+            return;
+        }
+        if (!status) {
+            setError("Please select a status.");
+            return;
+        }
+        if (!currentUser || !currentUser.email) {
+            setError("Admin email is missing.");
+            return;
+        }
 
-            console.log(boards)
-            setUserBoards(boards); // Update the boards state
-        } catch (error) {
-            throw new Error(error);
+        // Clear any previous error and success message
+        setError("");
+        setSuccess("");
+
+        try {
+            await sendUserNotification(selectedUser.uid, status, message, currentUser.email);
+            setMessage("");
+            setSuccess("Message sent successfully!"); // Set success message
+
+            // Optionally clear the success message after a few seconds
+            setTimeout(() => {
+                setSuccess("");
+                setError("");
+            }, 3000);
+        } catch (err) {
+            setError("Error sending notification: " + err.message);
         }
     };
 
@@ -48,8 +76,13 @@ const ActivityProvider = ({ children }) => {
         createBoard, setCreateBoard,
         IsCreateBoard, setIsCreateBoard,
         boardAttr, setBoardAttr,
-        userBoards, setUserBoards, // Pass the boards to the context
-        handleCreateBoard
+        userBoards, setUserBoards,
+        message, setMessage,
+        selectedUser, setSelectedUser,
+        status, setStatus,
+        error, setError,
+        success, setSuccess,
+        handleSendMessage,
     };
 
     return (

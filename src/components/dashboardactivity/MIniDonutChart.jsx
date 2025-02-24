@@ -10,13 +10,14 @@ const data = [
 const COLORS = ['#1c77ff', '#5599ff', '#9bc3ff'];
 
 const MiniDonutChart = () => (
-  <ResponsiveContainer width={150} height={150}>
+  // <ResponsiveContainer width={150} height={150}>
+  <ResponsiveContainer width={115} height={115}>
     <PieChart>
       <Pie
         data={data}
         dataKey="value"
-        innerRadius={60}
-        outerRadius={70}
+        innerRadius={40}
+        outerRadius={50}
         startAngle={90}
         endAngle={-270}
         label={false}
