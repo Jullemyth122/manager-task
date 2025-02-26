@@ -14,6 +14,7 @@ const ActivityProvider = ({ children }) => {
         boardTitle: '',
         boardVisibility: '',
         boardTemplate: '',
+        boardInviteEmail:[]
     });
 
     const [userBoards, setUserBoards] = useState([]); // State to store user boards

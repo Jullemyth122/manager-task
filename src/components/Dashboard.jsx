@@ -75,7 +75,6 @@ const computeGainLoss = (data, period) => {
   };
 };
   
-  // Helper to display gain or loss.
 const displayPercent = (gainLoss) => {
   if (Number(gainLoss.gain) > 0) return `+${gainLoss.gain}%`;
   if (Number(gainLoss.loss) > 0) return `${gainLoss.loss}%`;
@@ -84,34 +83,30 @@ const displayPercent = (gainLoss) => {
 
 const MainDash = () => {
 
+  const { userBoards } = useActivity();
   const { accs } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Adjust how many items you want per page
 
-  // Filter accounts using your custom hook (search by username and email)
   const filteredAccs = useSearchFilter(accs, searchTerm, ['username', 'email']);
 
-  // Sort the filtered accounts by createdAt (newest first)
   const sortedAccs = filteredAccs.slice().sort((a, b) => {
     const dateA = a.createdAt && a.createdAt.toDate ? a.createdAt.toDate() : new Date(a.createdAt);
     const dateB = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate() : new Date(b.createdAt);
     return dateB - dateA;
   });
 
-  // Pagination calculations
   const totalPages = Math.ceil(sortedAccs.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = sortedAccs.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Handler for search input changes
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // reset to first page whenever search changes
+    setCurrentPage(1); 
   };
 
-  // Handlers for pagination
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
@@ -120,19 +115,16 @@ const MainDash = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  // Use the sample data.
   const accData = sampleAccs;
   const sharedData = sampleShared;
   const premiumData = samplePremium;
 
-  // Since we're only tracking "This Day", the period is hardcoded.
   const period = 'thisDay';
 
   const accGainLoss = computeGainLoss(accData, period);
   const sharedGainLoss = computeGainLoss(sharedData, period);
   const premiumGainLoss = computeGainLoss(premiumData, period);
 
-  // Helper functions for background and text colors.
   const getBackground = (gainLoss) =>
     Number(gainLoss.gain) > 0
       ? 'rgb(182, 255, 182)'
@@ -146,6 +138,19 @@ const MainDash = () => {
       : Number(gainLoss.loss) > 0
       ? 'rgb(199, 20, 20)'
       : '#000';
+
+  const countSharedTasksForEmail = (boards, email) =>
+    boards.reduce((count, board) => {
+      if (
+        board.boardVisibility === "Workspace" &&
+        board.boardInviteEmail &&
+        board.boardInviteEmail.includes(email)
+      ) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+      
 
   return (
       <div className="mainboard">
@@ -277,13 +282,13 @@ const MainDash = () => {
                 </svg>
               </div>
               <div className="pagination-controls flex items-center justify-center gap-2.5">
-                <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                <button className='cursor-pointer' onClick={handlePrevPage} disabled={currentPage === 1}>
                   <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8.36296 13.6113C8.47884 13.4957 8.57077 13.3583 8.6335 13.2071C8.69623 13.0559 8.72852 12.8938 8.72852 12.7301C8.72852 12.5664 8.69623 12.4042 8.6335 12.253C8.57077 12.1018 8.47884 11.9645 8.36296 11.8488L3.51296 6.99881L8.36296 2.14881C8.59668 1.91509 8.72799 1.5981 8.72799 1.26756C8.72799 0.937031 8.59668 0.620034 8.36296 0.386312C8.12924 0.152589 7.81224 0.0212879 7.48171 0.0212879C7.15118 0.0212879 6.83418 0.152589 6.60046 0.386312L0.86296 6.12381C0.747081 6.23946 0.655146 6.37682 0.59242 6.52803C0.529693 6.67925 0.497406 6.84135 0.497406 7.00506C0.497406 7.16877 0.529693 7.33088 0.59242 7.48209C0.655146 7.63331 0.747081 7.77067 0.86296 7.88631L6.60046 13.6238C7.07546 14.0988 7.87546 14.0988 8.36296 13.6113Z" fill="#000"/>
                   </svg>
                 </button>
                 <span>{`${currentPage} of ${totalPages}`}</span>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                <button className='cursor-pointer' onClick={handleNextPage} disabled={currentPage === totalPages}>
                   <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.63704 0.386734C0.52116 0.502376 0.429226 0.639737 0.366499 0.790954C0.303772 0.94217 0.271484 1.10427 0.271484 1.26798C0.271484 1.43169 0.303772 1.5938 0.366499 1.74501C0.429226 1.89623 0.52116 2.03359 0.63704 2.14923L5.48704 6.99923L0.63704 11.8492C0.403318 12.083 0.272014 12.4 0.272014 12.7305C0.272014 13.061 0.403318 13.378 0.63704 13.6117C0.870762 13.8455 1.18776 13.9768 1.51829 13.9768C1.84882 13.9768 2.16582 13.8455 2.39954 13.6117L8.13704 7.87423C8.25292 7.75859 8.34485 7.62123 8.40758 7.47001C8.47031 7.3188 8.50259 7.15669 8.50259 6.99298C8.50259 6.82927 8.47031 6.66717 8.40758 6.51595C8.34485 6.36474 8.25292 6.22738 8.13704 6.11173L2.39954 0.374234C1.92454 -0.100766 1.12454 -0.100766 0.63704 0.386734Z" fill="#000"/>
                   </svg>
@@ -293,37 +298,52 @@ const MainDash = () => {
             <div className="layer-list">
               <table>
                 <thead>
-                  <tr> 
-                    <th> Email / Username </th>
-                    <th> UID </th>
-                    <th> Created Date </th>
-                    <th> Update Details  </th>
-                    <th> Update Date  </th>
-                    <th> Shared Tasks  </th>
-                    <th> Premium Badge  </th>
+                  <tr>
+                    <th>Email / Username</th>
+                    <th>UID</th>
+                    <th>Created Date</th>
+                    <th>Update Details</th>
+                    <th>Updated Date</th>
+                    <th>Shared Tasks</th>
+                    <th>Premium Badge</th>
                   </tr>
                 </thead>
-                <tbody className='tbody-container'>
-                {currentItems.map(acc => {
-                  const accDate =
-                    acc.createdAt && acc.createdAt.toDate
-                      ? acc.createdAt.toDate()
-                      : new Date(acc.createdAt);
-                  return (
-                    <tr key={acc.id}>
-                      <td>{acc.username || acc.email || '-'}</td>
-                      <td>{acc.uid || ''}</td>
-                      <td>{accDate.toLocaleString()}</td>
-                      <td>Update Details</td>
-                      <td>Update Date</td>
-                      <td>Shared Tasks</td>
-                      <td>Premium Badge</td>
-                    </tr>
-                  );
-                })}
+                <tbody className="tbody-container">
+                  {currentItems
+                    .slice() // Copy array to avoid mutating the original
+                    .sort((a, b) => {
+                      // Use updatedAt if available, otherwise fallback to createdAt
+                      const getDate = (acc) =>
+                        acc.updatedAt && acc.updatedAt.toDate
+                          ? acc.updatedAt.toDate()
+                          : new Date(acc.createdAt);
+                      return getDate(a) - getDate(b);
+                    })
+                    .map((acc) => {
+                      const createdDate =
+                        acc.createdAt && acc.createdAt.toDate
+                          ? acc.createdAt.toDate()
+                          : new Date(acc.createdAt);
+                      const updatedDate =
+                        acc.updatedAt && acc.updatedAt.toDate
+                          ? acc.updatedAt.toDate()
+                          : new Date(acc.createdAt);
+                      return (
+                        <tr key={acc.id}>
+                          <td>{acc.username || acc.email || '-'}</td>
+                          <td>{acc.uid || '-'}</td>
+                          <td>{createdDate.toLocaleString()}</td>
+                          <td>{acc.updates || '-'}</td>
+                          <td>{updatedDate.toLocaleString()}</td>
+                          <td>{countSharedTasksForEmail(userBoards, acc.email) || '-'}</td>
+                          <td>{acc.isPremiumUser ? "Yes" : "No"}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
+
           </div>
       </div>
     </div>

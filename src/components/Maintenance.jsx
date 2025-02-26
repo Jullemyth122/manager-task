@@ -14,10 +14,12 @@ import { useTruncateText } from '../hooks/useTruncateText'
 const MaintenanceBoard = () => {
 
     const { accs, currentUser } = useAuth()
+
     const { 
         handleSendMessage, status, setStatus, message, 
         setMessage, selectedUser, setSelectedUser, error,
-        success, setSuccess
+        success, setSuccess,
+        userBoards
  
     } = useActivity()
 
@@ -36,7 +38,7 @@ const MaintenanceBoard = () => {
 
 
     const handleStatusClick = () => {
-      setDropdownVisible((prev) => !prev);
+        setDropdownVisible((prev) => !prev);
     };
   
     const handleOptionClick = (selectedStatus, e) => {
@@ -46,23 +48,23 @@ const MaintenanceBoard = () => {
     };
   
     useEffect(() => {
-      const handleClickOutside = (e) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-          setDropdownVisible(false);
-        }
-      };
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+        const handleClickOutside = (e) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+            setDropdownVisible(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
   
+          
+
 
     return (
         <div className="mainboard">
             <div className="sdash-1">
                 <h1 className='text-2xl'> Maintenance </h1>
-                
                 <div className="data-1 flex items-center justify-start gap-2 flex-wrap">
-                    
                     <div className="overview-content w-96">
                         <h1> Shared Tasks & Premium Rate  </h1>
 
@@ -123,18 +125,15 @@ const MaintenanceBoard = () => {
                         <h1>
                             Users Data Request / Control
                         </h1>
-
                         <div className="act-data-1">
                             <AccReqControl/>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="data-2 gap-5">
                     <div className="sdm">
                         <h1> Send User Message </h1>
-
                         <form className="sdm-comp" onSubmit={e => handleSendMessage(e, currentUser)}>
                             <div className="search-sdm flex items-center justify-center gap-3">
                                 <div className="search-area relative flex items-center justify-center">
@@ -334,17 +333,40 @@ const MaintenanceBoard = () => {
                                                         {useTruncateText(acc.email || '-', 35)}
                                                     </td>
                                                     <td>
-                                                        Basic || X
-                                                        <br/> 
-                                                        Medium || X
-                                                        <br/> 
-                                                        Pro || X 
+                                                        {
+                                                        ["Basic", "Medium", "Pro"].map((tier, index) => (
+                                                            <React.Fragment key={tier}>
+                                                            {tier} || {acc.ratePremium === index + 1 ? `$${acc.PremiumPrice}` : "X"}
+                                                            <br />
+                                                            </React.Fragment>
+                                                        ))
+                                                        }
+
                                                     </td>
                                                     <td>
-                                                        *coloreds
+                                                        {(() => {
+                                                        const boards = userBoards.filter(board => board.email === acc.email);
+                                                        const allColors = boards.flatMap(board =>
+                                                            board.taskList
+                                                            .map(task => task.color)
+                                                            .filter(color => color && color.trim() !== "")
+                                                        );
+                                                        const uniqueColors = Array.from(new Set(allColors));
+                                                        return uniqueColors.length > 0 ? uniqueColors.length : 0;
+                                                        })()}
+
                                                     </td>
+
                                                     <td>
-                                                        Limits Tasks
+                                                        Card Limits : : 
+                                                        <span className='font-bold'>
+                                                            {acc.cardLimits}
+                                                        </span>
+                                                        <br/>
+                                                        Task Limits : : 
+                                                        <span className="font-bold">
+                                                            {acc.taskLimits}
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             );
