@@ -2,6 +2,144 @@
 
 @import "tailwindcss";
 
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+
+  /* Navside bg-light */
+  --bg-nav-grd-darkLight: #d1c251;
+  --bg-nav-grd-darkDark: #538fff;
+
+  /* Home */
+  --home-elip1-grd-light: #fff;
+  --home-elip1-grd-dark: #d1c251;
+
+  --home-elip2-grd-light: #fff;
+  --home-elip2-grd-dark: #538fff;
+
+  --home-showContent-light: #d1c251;
+  --home-showContent-dark: #538fff;
+
+  --home-showContent2-light: #ffffffca;
+  --home-showContent2-dark: #dacc6292;
+
+  --home-input: #ffffffae;
+
+  /* Sidebar */
+  --dash-sbar-light: #d9cc6c96;
+  --dash-sbar-dark: #8cbaffa8;
+  --sidenav-ISO: #000;
+  --sidenav-ISO2: #000;
+  --sidenav-Title: #285de2;
+
+  --sidenav-hoverBoardTitle: #5cabff97;
+  /* Area of Dashboard */
+  --ovc-light: #e4d456;
+  --ovc-gray: #fffbc147;
+  --ovc-dark: #79afff;
+
+  --svg-path: #094eb4;
+  --svg-path2: #000;
+
+  --calendar-light: #3b73ff;
+  --calendar-light2: #3da1ff47;
+  --calendar-light3: #add2ff8b;
+
+  --user-act-bg: #b2c8ff;
+
+  /* Area of Maintenance */
+  --aom-light: #fff185;
+  --aom-gray: #fffbc147;
+  --aom-dark: #79afff;
+
+  --aom2-light: #c6b538;
+  --aom2-gray: #fffbc147;
+  --aom2-dark: #609efba9;
+
+  --aom3-light: #c6b538;
+  --aom3-gray: #fffbc147;
+  --aom3-dark: #609efba9;
+
+  --aom4-light: #9b8b10;
+  --aom4-gray: #fffbc147;
+  --aom4-dark: #2a7fffa9;
+
+  --emoji-gray: #ffea6370;
+  --emoji-send: #ffeb9dd3;
+
+
+
+}
+
+[data-theme="dark"] {
+  --bg-color: #252525;
+  --text-color: #fff;
+
+  /* Navside bg-dark */
+  --bg-nav-grd-darkLight: #454545;
+  --bg-nav-grd-darkDark: #232222;
+
+  /* Home */
+  --home-elip1-grd-light: #212020;
+  --home-elip1-grd-dark: #424242;
+
+  --home-elip2-grd-light: #212020;
+  --home-elip2-grd-dark: #424242;
+
+  --home-showContent-light: #212121;
+  --home-showContent-dark: #424242;
+
+  --home-showContent2-light: #222222;
+  --home-showContent2-dark: #6a6a6a;
+
+  --home-input: #949494ae;
+
+
+  /* Sidebar */
+  --dash-sbar-light: #4b4b4b;
+  --dash-sbar-dark: #3f3f3f;
+  --sidenav-ISO: #cfcfcf;
+  --sidenav-ISO2: #fcfcfc;
+  --sidenav-Title: #a0a0a0;
+  --sidenav-hoverBoardTitle: #68748097;
+
+  /* Area of Dashboard */
+  --ovc-light: #c5c5c5;
+  --ovc-gray: #8f8f8f47;
+  --ovc-dark: #616161;
+
+  --svg-path: #cccccc;
+  --svg-path2: #f6f6f6;
+
+  --calendar-light: #bcc0ca;
+  --calendar-light2: #0f2236;
+  --calendar-light3: #2657ba;
+
+  --user-act-bg: #4d4d4de6;
+
+
+  /* Area of Maintenance */
+  --aom-light: #cacaca;
+  --aom-gray: #14140847;
+  --aom-dark: #111720;
+
+  --aom2-light: #c3c3c3;
+  --aom2-gray: #ffffff47;
+  --aom2-dark: #060b12a9;
+
+  --aom3-light: #c5c5c5;
+  --aom3-gray: #27272747;
+  --aom3-dark: #0f1927a9;
+
+  --aom4-light: #a8a8a8;
+  --aom4-gray: #47474747;
+  --aom4-dark: #1e1e1ea9;
+
+  --emoji-gray: #2f2b1270;
+  --emoji-send: #4275e3d3;
+
+}
+
 body,
 * {
   margin: 0;
@@ -11,5 +149,6 @@ body,
 }
 
 body {
-  background: whitesmoke;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }

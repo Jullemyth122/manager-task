@@ -48,7 +48,7 @@
             height: 4px;
             border-radius: 5px;
             box-shadow: 0px 3px 3px #00000062;
-            background: linear-gradient(to right, #fffa6f, #4d89e2);
+            background: linear-gradient(to right, var(--bg-nav-grd-darkLight), var(--bg-nav-grd-darkDark));
         }
     }
 
@@ -70,13 +70,13 @@
             .elip1 {
                 left: -20%;
                 top: 25%;
-                background: radial-gradient(circle at 0% 0%, #fff, #d1c251);
+                background: radial-gradient(circle at 0% 0%, var(--home-elip1-grd-light), var(--home-elip1-grd-dark));
             }
 
             .elip2 {
                 right: -20%;
                 top: 50%;
-                background: radial-gradient(circle at 100% 0%, #fff, #538fff);
+                background: radial-gradient(circle at 100% 0%, var(--home-elip2-grd-light), var(--home-elip2-grd-dark));
             }
         }
 
@@ -88,7 +88,7 @@
             // width: 500px;
             width: 400px;
             box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
-            background: radial-gradient(circle at 0% 0%, #d1c251, #538fff);
+            background: radial-gradient(circle at 0% 0%, var(--home-showContent-light), var(--home-showContent-dark));
             height: calc(100vh - 75px - 200px - 0vh);
             // @media (max-width: 1500px) {
             //     width: 85vw;
@@ -110,7 +110,7 @@
                 margin: 20px 0px;
 
                 input {
-                    background: #ffffffae;
+                    background: var(--home-input);
                     padding: 10px;
                     border-radius: 7.5pxs;
                 }
@@ -128,7 +128,7 @@
                 width: 80%;
                 align-self: center;
                 justify-self: center;
-                background: #ffffffbc;
+                background: var(--home-input);
                 margin: 30px 0;
                 overflow: hidden;
                 border-radius: 7.5px;

@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
                 setCurrentUser(user);
             } else {
                 setErrorMessage("Your account is pending approval. Please contact the administrator.");
-                await auth.signOut();
+                // await auth.signOut();
                 setCurrentUser(null);
             }
             } else {

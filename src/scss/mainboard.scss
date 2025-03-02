@@ -9,7 +9,7 @@
       position: relative;
 
       * {
-        color: #000;
+        color: var(--sidenav-ISO);
       }
 
       .sdasher {
@@ -23,7 +23,7 @@
         width: 20vw;
         height: 280px;
         padding: 10px;
-        background: linear-gradient(150deg, #e4d456, #f3ed9847, #79afff);
+        background: linear-gradient(150deg, var(--ovc-light), var(--ovc-gray), var(--ovc-dark));
         background-size: 200% 200%;
         background-position: 200% 100%;
         border-radius: 15px;
@@ -40,6 +40,14 @@
           align-items: center;
           justify-content: flex-start;
           gap: 10px;
+
+
+          svg {
+            path {
+              fill: var(--svg-path);
+            }
+          }
+
         }
 
         .bg-static {
@@ -74,6 +82,11 @@
             height: 50%;
             right: -15%;
             top: 25%;
+
+            path {
+              fill: var(--svg-path);
+            }
+
           }
         }
 
@@ -114,7 +127,7 @@
       }
 
       .calendar-data {
-        background: linear-gradient(150deg, #3b73ff, #3da1ff47, #add2ff8b);
+        background: linear-gradient(150deg, var(--calendar-light), var(--calendar-light2), var(--calendar-light3));
         background-size: 200% 200%;
         background-position: 200% 100%;
 
@@ -132,23 +145,32 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        background: #b2c8ff;
+        background: var(--user-act-bg);
         padding: 10px;
         border-radius: 7.5px;
+
         input {
           width: 30vw;
           border-radius: 7.5px;
           outline: none;
           cursor: pointer;
           padding: 10px;
-          color: #000;
-          background: #fff;
+          color: var(--sidenav-ISO);
+          background: var(--home-input);
+
           &::placeholder {
-            color: #000;
+            color: var(--sidenav-ISO);
+          }
+        }
+
+        svg {
+          path {
+            fill: var(--sidenav-ISO);
           }
         }
 
       }
+
       .layer-list {
         width: 100%;
         overflow-y: auto;
@@ -172,7 +194,7 @@
           margin: 5px 0px;
 
           thead {
-            background: linear-gradient(150deg, #3b73ff, #3da1ff47, #add2ff8b);
+            background: #639ef6;
 
             tr {
               // display: flex;
@@ -201,8 +223,8 @@
               // gap: 5px;
               border-bottom: 1px solid rgba(0, 0, 0, 0.1);
               transition: background-color 0.3s ease;
-              background: linear-gradient(150deg, #acc4ff, #add2ff8b);
-
+              /* background: linear-gradient(150deg, #acc4ff, #add2ff8b); */
+              background: var(--ovc-dark);
 
               &:hover {
                 background-color: rgba(0, 0, 0, 0.05);

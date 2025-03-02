@@ -1,76 +1,79 @@
-.dashboard-comp, .maintenance-comp {
+.sidebar {
     font-family: "Jura", sans-serif;
 
-    .sidebar {
-        .side-comp {
-
-            .nav-side {
-                // background: orange;
-                // margin: 0px 20px;
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100px;
+    .side-comp {
 
 
-                h3.txt1 {
-                    text-align: center;
-                    width: 100%;
-                    color: #fff;
-                    font-size: 30px;
-                    // background: orange;
-                    clip-path: polygon(0 0, 44.25% 0, 44.25% 100%, 0% 100%);
-                }
-
-                h3.txt2 {
-                    text-align: center;
-                    width: 100%;
-                    font-size: 30px;
-                    // top: 0;
-                    left: 0px;
-                    // background: orange;
-                    clip-path: polygon(45.5% 0, 100% 0%, 100% 100%, 45.5% 100%);
-                    position: absolute;
-                    color: #8c8022;
-                    z-index: 2;
-                }
-
-
+        svg {
+            path {
+                fill: var(--sidenav-ISO, #fff); // Dark mode icon color
             }
+        }
 
-            h1.admin-txt {
-                color: rgb(40, 93, 226);
+        .nav-side {
+            // background: orange;
+            // margin: 0px 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+
+
+            h3.txt1 {
                 text-align: center;
                 width: 100%;
-                font-size: 22px;
+                color: #fff;
+                font-size: 30px;
+                // background: orange;
+                clip-path: polygon(0 0, 44.25% 0, 44.25% 100%, 0% 100%);
             }
-            
-            li {
 
-                display: grid;
-                grid-template-columns: 30% 70%;
-                font-size: 18px;
-                gap: 20px;
+            h3.txt2 {
+                text-align: center;
+                width: 100%;
+                font-size: 30px;
+                // top: 0;
+                left: 0px;
+                // background: orange;
+                clip-path: polygon(45.5% 0, 100% 0%, 100% 100%, 45.5% 100%);
+                position: absolute;
+                color: #8c8022;
+                z-index: 2;
+            }
 
 
-                & > * { 
-                    align-self: center;
-                    justify-self: center;
-                }
+        }
 
-                svg {
-                    width: 20px;
-                    height: 20px;
-                }
+        h1.admin-txt {
+            color: var(--sidenav-Title);
+            text-align: center;
+            width: 100%;
+            font-size: 22px;
+        }
 
-                a {
-                
-                    width: 100%;
-                }
+        li {
+
+            display: grid;
+            grid-template-columns: 30% 70%;
+            font-size: 18px;
+            gap: 20px;
+
+
+            &>* {
+                align-self: center;
+                justify-self: center;
+            }
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            a {
+
+                width: 100%;
             }
         }
     }
-
-
 }

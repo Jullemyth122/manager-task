@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { doc, updateDoc } from "firebase/firestore";
 import { useAuth } from '../../context/useAuth';
 import { db } from '../../utility/firebase';
 import { useTruncateText } from '../../hooks/useTruncateText';
+import { useSearchFilter } from '../../hooks/useSearchFilters';
 
 const AccReqControl = () => {
   const { accs, getAccounts } = useAuth(); // Assume getAccounts refreshes the list after an update
 
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Sort accounts by createdAt (newest first)
   const sortedAccs = accs.slice().sort((a, b) => {
@@ -14,6 +16,13 @@ const AccReqControl = () => {
     const dateB = b.createdAt && b.createdAt.toDate ? b.createdAt.toDate() : new Date(b.createdAt);
     return dateB - dateA;
   });
+
+  const filteredAccs = useSearchFilter(sortedAccs, searchTerm, ['username', 'email']);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    // setCurrentPage(1); 
+  };
 
   // Handler to update a checkbox field for an account in Firestore
   const handleCheckboxChange = async (accId, field, currentValue) => {
@@ -62,6 +71,9 @@ const AccReqControl = () => {
         type="text" 
         className="search-text"
         placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+
       />
       <div className="table-container">
         <table>
@@ -74,7 +86,7 @@ const AccReqControl = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedAccs.map(acc => {
+            {filteredAccs.map(acc => {
               const accDate = acc.createdAt && acc.createdAt.toDate
                 ? acc.createdAt.toDate()
                 : new Date(acc.createdAt);
