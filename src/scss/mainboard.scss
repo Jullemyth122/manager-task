@@ -145,7 +145,8 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        background: var(--user-act-bg);
+        background: linear-gradient(150deg, var(--calendar-light), var(--calendar-light2), var(--calendar-light3));
+        // background: var(--user-act-bg);
         padding: 10px;
         border-radius: 7.5px;
 
@@ -194,7 +195,7 @@
           margin: 5px 0px;
 
           thead {
-            background: #639ef6;
+            background: linear-gradient(150deg, var(--calendar-light3), var(--calendar-light2), var(--calendar-light));
 
             tr {
               // display: flex;
@@ -208,6 +209,7 @@
             }
 
             th {
+              color: var(--sidenav-ISO);
               padding: 12px 15px;
               text-align: left;
               font-weight: 600;
